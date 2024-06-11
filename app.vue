@@ -3,5 +3,4 @@
 
 <template>
   <NuxtLayout />
-  <h1>Привет, CRM!</h1>
 </template>
