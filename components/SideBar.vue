@@ -8,7 +8,7 @@ import { NuxtLink } from '../.nuxt/components';
     <button class="absolute top-2 right-3 transition-colors hover:text-primary">
       <Icon name="line-md:logout" size="22px"/>
     </button>
-    <UiButton>Button</UiButton>  
+     <LayoutMenu />
   </aside>
 </template>
 
