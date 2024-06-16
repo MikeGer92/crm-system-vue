@@ -5,7 +5,10 @@ import { NuxtLink } from '../.nuxt/components';
     <NuxtLink class="mb-10 block" to="/" >    
       <NuxtImg class="mx-auto" src="../public/images/logo.svg" alt="" width="100px"/>
     </NuxtLink >
-      
+    <button class="absolute top-2 right-3 transition-colors hover:text-primary">
+      <Icon name="line-md:logout" size="22px"/>
+    </button>
+    <UiButton>Button</UiButton>  
   </aside>
 </template>
 
