@@ -1,12 +1,11 @@
 import { componentNames } from '../.nuxt/components';
 <script lang="ts" setup>
 
-console.log('loaded')
-
 </script>
 
 <template>
-  <section>
+  <section class="grid">
+    <SideBar />
     <div>
       <slot />
     </div>
@@ -14,4 +13,11 @@ console.log('loaded')
 
 </template>
 
-<style scoped ></style>
+<style scoped >
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    min-height: 100vh;
+  }
+
+</style>
