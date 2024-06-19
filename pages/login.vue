@@ -1,4 +1,5 @@
 import { type } from '../.nuxt/types/imports';
+import { UiButton } from '../.nuxt/components';
 <template>
   <div class="flex items-center justify-center min-h-screen w-full">
     <div class="rounded bg-sidebar w-1/4 p-5">
@@ -13,17 +14,20 @@ import { type } from '../.nuxt/types/imports';
         />
         <UiInput 
           placeholder="Password" 
-          type="string" 
+          type="password" 
           class="mb-3"
           v-model="refPassword"
         />
         <UiInput 
           placeholder="Name" 
-          type="string" 
+          type="name"
           class="mb-3"
           v-model="refName"
         />
-
+        <div class="flex items-center justify-center gap-5">
+          <UiButton type="button">Login</UiButton>
+          <UiButton type="button">Register</UiButton>
+        </div>
       </form>
     </div>
 
@@ -31,6 +35,8 @@ import { type } from '../.nuxt/types/imports';
 </template>
 
 <script setup lang="ts">
+import { useIsLoadingStore } from '~/store/auth.store';
+
 
 useSeoMeta({
   title: 'Login'
@@ -43,6 +49,10 @@ const refName = ref('')
 watch(refEmail, () => {
   console.log(refEmail.value)
 })
+
+const isLoadingStore = useIsLoadingStore()
+
+const router = useRouter()
 
 </script>
 
