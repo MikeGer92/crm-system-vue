@@ -35,7 +35,8 @@ import { UiButton } from '../.nuxt/components';
 </template>
 
 <script setup lang="ts">
-import { useIsLoadingStore } from '~/store/auth.store';
+import { account } from '~/lib/appwrite';
+import { useAuthStore, useIsLoadingStore } from '~/store/auth.store';
 
 
 useSeoMeta({
@@ -45,6 +46,7 @@ useSeoMeta({
 const refEmail = ref('')
 const refPassword = ref('')
 const refName = ref('')
+const authStore = useAuthStore()
 
 watch(refEmail, () => {
   console.log(refEmail.value)
@@ -53,6 +55,24 @@ watch(refEmail, () => {
 const isLoadingStore = useIsLoadingStore()
 
 const router = useRouter()
+
+const login = async () => {
+  isLoadingStore.set(true)
+  await account.createEmailToken(refEmail.value, refPassword.value)
+  const response = await account.get()
+  if (response) {
+    authStore.set({
+      email: response.email,
+      name: response.name,
+      status: response.status
+    })
+  }
+  refEmail.value = ''
+  refName.value = ''
+  refPassword.value = ''
+  await router.push('/')
+  isLoadingStore.set(false)
+}
 
 </script>
 
