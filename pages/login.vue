@@ -47,6 +47,7 @@ const refEmail = ref('')
 const refPassword = ref('')
 const refName = ref('')
 const authStore = useAuthStore()
+const route = useRoute()
 
 watch(refEmail, () => {
   console.log(refEmail.value)
@@ -70,7 +71,7 @@ const login = async () => {
   refEmail.value = ''
   refName.value = ''
   refPassword.value = ''
-  await router.push('/')
+  await navigateTo({path: '/'})
   isLoadingStore.set(false)
 }
 
