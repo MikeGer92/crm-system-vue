@@ -10,10 +10,15 @@
 </template>
 
 <script setup lang="ts">
+import { type ICard, type IColumn } from '~/components/kanban/kanban.types';
+
 
 useSeoMeta({
   title: 'Home | CRM'
 })
+
+const dragCardRef = ref<ICard | null>(null)
+const sourceColumnRef = ref<IColumn | null>(null)
 
 </script>
 
