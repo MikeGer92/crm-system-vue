@@ -17,6 +17,7 @@
     "appwrite": "^15.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.11",
     "lucide-react": "^0.395.0",
     "lucide-vue-next": "^0.395.0",
     "npm": "^10.8.1",

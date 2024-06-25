@@ -12,7 +12,7 @@
 <script setup lang="ts">
 
 useSeoMeta({
-  title: 'Home'
+  title: 'Home | CRM'
 })
 
 </script>
