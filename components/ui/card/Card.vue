@@ -26,7 +26,7 @@ const props = defineProps<{
   from {
     @apply border-[#252c83d];
     transform: scale(0.5);
-    translate: -30px;
+    translate: 300px;
     opacity: 0.4;
   }
   90% {
@@ -41,7 +41,7 @@ const props = defineProps<{
 }
 
 .animation {
-  animation: show 0.33 ease-in-out
+  animation: show 0.33s ease-in-out
 }
 
 </style>

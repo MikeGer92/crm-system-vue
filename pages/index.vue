@@ -10,10 +10,11 @@
           {{ column.name }}
         </div>
         <div>
-          <UiCard class="mb-3" draggable="false">
-            <UiCardHeader role="button">name card</UiCardHeader>
-            <UiCardContent>Компания</UiCardContent>
-            <UiCardFooter>Date</UiCardFooter>
+          <UiCard v-for="card in column.items" :key="card.id" class="mb-3" draggable="false">
+            <UiCardHeader role="button">{{ card.name }}</UiCardHeader>
+            <UiCardDescription>{{ convertCurrency(card.price) }}</UiCardDescription>
+            <UiCardContent>{{ card.companyName }}</UiCardContent>
+            <UiCardFooter>{{ dayjs(card.$createdAt).format('DD MMMM YYYY') }}</UiCardFooter>
           </UiCard>
         </div>
       </div>
@@ -24,6 +25,8 @@
 <script setup lang="ts">
 import { type ICard, type IColumn } from '~/components/kanban/kanban.types';
 import { useKanbanQuery } from '~/components/kanban/useKanbanQuery';
+import { convertCurrency } from '~/lib/convertCurrency';
+import dayjs, { Dayjs } from 'dayjs';
 
 
 useSeoMeta({
