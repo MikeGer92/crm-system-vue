@@ -3,6 +3,8 @@ import { COLLECTION_DEALS, DB_ID } from '~/app.constants'
 import type { IDeal } from '~/types/deals.types'
 import { KANBAN_DATA } from './kanban.data'
 import type { IColumn } from './kanban.types'
+import { DB } from '~/lib/appwrite'
+
 
 export function useKanbanQuery() {
 	return useQuery({
@@ -29,7 +31,6 @@ export function useKanbanQuery() {
 					})
 				}
 			}
-
 			return newBoard
 		},
 	})
