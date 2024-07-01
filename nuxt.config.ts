@@ -14,7 +14,10 @@ export default defineNuxtConfig({
         }
       }
     }],
-    'nuxt-icon'
+    'nuxt-icon',
+    ['@vee-validate/nuxt', {
+       autoImports: true,
+    }]
   ],
   shadcn: {
   prefix: 'Ui',
