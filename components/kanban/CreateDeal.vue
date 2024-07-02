@@ -17,49 +17,87 @@
       </Icon>
     </button>
   </div>
-  <form></form>
+  <form v-if="isOpenForm" @submit="onSubmit" class="form">
+    <UiInput
+      placeholder="Наименование"
+      v-model="name"
+      :bind="nameAttrs"
+      type="text"
+      class="input"
+    ></UiInput>
+    <UiInput
+      placeholder="Сумма"
+      v-model="price"
+      :bind="priceAttrs"
+      type="text"
+      class="input"
+    ></UiInput>
+    <UiInput
+      placeholder="Email"
+      v-model="customerEmail"
+      :bind="customerEmailAttrs"
+      type="text"
+      class="input"
+    ></UiInput>
+    <UiInput
+      placeholder="Компания"
+      v-model="customerName"
+      :bind="customerNameAttrs"
+      type="text"
+      class="input"
+    ></UiInput>
+    <button class="btn" :disabled="isPending">{{ isPending ? 'Загрузка...': 'Добавить' }}</button>
+  </form>
 </template>
 
 <script setup lang="ts">
 
 import { useMutation } from '@tanstack/vue-query';
-import { v4 as uuidv4 } from 'uuid' 
-// import { DefineProps } from 'vue';
+import { v4 as uuid } from 'uuid' 
 import { COLLECTION_DEALS, DB_ID } from '~/app.constants';
+import { DB } from '~/lib/appwrite';
 import type { IDeal } from '~/types/deals.types';
 
 const isOpenForm = ref<boolean>(false)
-// interface IDealFormState extends Pick<IDeal, 'name' | 'price'>
-// {
-//   customer: {
-//     email: string
-//     name: string
-//   },
-//   status: string
-// }
+interface IDealFormState extends Pick<IDeal, 'name' | 'price'>
+{
+  customer: {
+    email: string
+    name: string
+  },
+  status: string
+}
 
-// const props = defineProps({
-//   status: {
-//     type: String,
-//     default: '',
-//   },
-//   refetch: {
-//     type: Function
-//   }
-// })
-// const { handleSubmit, defineField, handleReset } = useForm<IDealFormState>({
-//   initialValues: {
-//     status: props.status
-//   }
-// })
-//  const [name, nameAttrs] = defineField('name')
-//  const [price, priceAttrs] = defineField('price')
-//  const [customerEmail, customerEmailAttrs] = defineField('customer.email')
-//  const [customerName, customerNameAttrs] = defineField('customer.name')
+const props = defineProps({
+  status: {
+    type: String,
+    default: '',
+  },
+  refetch: {
+    type: Function
+  }
+})
+const { handleSubmit, defineField, handleReset } = useForm<IDealFormState>({
+  initialValues: {
+    status: props.status
+  }
+})
+ const [name, nameAttrs] = defineField('name')
+ const [price, priceAttrs] = defineField('price')
+ const [customerEmail, customerEmailAttrs] = defineField('customer.email')
+ const [customerName, customerNameAttrs] = defineField('customer.name')
 
-// function useForm<T>(arg0: { initialValues: { status: string; }; }): { handleSubmit: any; defineField: any; handleReset: any; } {
-//   throw new Error('Function not implemented.');
-// }
+const {mutate, isPending} = useMutation({
+  mutationKey: ['create a new deal'],
+  mutationFn: (data: IDealFormState) => DB.createDocument(DB_ID, COLLECTION_DEALS, uuid(), data),
+  onSuccess() {
+    props.refetch && props.refetch()
+    handleReset()
+  }
+})
+const onSubmit = handleSubmit(values => 
+  mutate(values)
+)
 </script>
 
 <style scoped>

@@ -10,6 +10,7 @@
           {{ column.name }}
         </div>
         <div>
+          <KanbanCreateDeal :refetch="refetch" :status="column.id"></KanbanCreateDeal>
           <UiCard v-for="card in column.items" :key="card.id" class="mb-3" draggable="false">
             <UiCardHeader role="button">{{ card.name }}</UiCardHeader>
             <UiCardDescription>{{ convertCurrency(card.price) }}</UiCardDescription>
